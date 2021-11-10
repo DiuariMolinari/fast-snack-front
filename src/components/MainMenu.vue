@@ -5,21 +5,25 @@
       color="#26a69a"
       dark
     >
+
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
-
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
+      
       <v-spacer></v-spacer>
       
         <v-btn icon >
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-      
-        <v-row>
-          <v-col md="4">
-            <v-text-field ></v-text-field>
-          </v-col>
-        </v-row>
+    
+        <v-text-field ></v-text-field>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon >
+        <v-icon>mdi-cart</v-icon>
+      </v-btn>
+
 
     </v-app-bar>
 
