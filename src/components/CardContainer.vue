@@ -10,7 +10,7 @@
           :key="card.id"
           :cols="columns"
         >
-          <Card :title="card.title" :price="card.price" :urlImage="card.src"/>
+          <Card :title="card.title" :price="card.price" :urlImage="card.src" :isNewCard="card.isNewCard" />
         </v-col>
       </v-row>
     </v-container>
@@ -19,20 +19,21 @@
 
 <script>
 import Card from './Card.vue'
+
   export default {
     data: () => ({
       cards: [
-        { id: 1, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 2, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 3, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 4, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 5, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 6, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 7, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 1, isNewCard: true, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 2, isNewCard: false, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 3, isNewCard: false, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 4, isNewCard: false, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 5, isNewCard: false, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 6, isNewCard: false, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 7, isNewCard: false, title: 'Salmão Refogado', price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
       ],
     }),
     components: {
-      Card
+      Card,
     },
     computed: {
       columns: function() {
