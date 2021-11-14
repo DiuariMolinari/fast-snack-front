@@ -27,21 +27,54 @@
               fab
               dark
               small
-              color="primary"
+              color="red"
               v-bind="attrs"
               v-on="on"
+              @click="RemoveAmount"
             >
               <v-icon
                 color="white"
                 dark
               >
-                mdi-cart
+                mdi-minus
               </v-icon>
             </v-btn>
             
           </template>
-          <span>{{ toolTip }}</span>
+          <span>Remover</span>
         </v-tooltip>
+
+        <div>
+          <span>{{amount}}</span>
+        </div>
+
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              class="mx-2"
+              fab
+              dark
+              small
+              color="primary"
+              v-bind="attrs"
+              v-on="on"
+              @click="AddAmount"
+            >
+              <v-icon
+                color="white"
+                dark
+              >
+                mdi-plus
+              </v-icon>
+            </v-btn>
+            
+          </template>
+          <span>Adicionar</span>
+        </v-tooltip>
+
+
+
+
       </v-card-actions>
     </v-card>
 
@@ -54,32 +87,43 @@ import ModalForm from './ModalForm.vue'
 
   export default {
     data: () => ({
-
+        amount: 0,
     }),
     props: {
+        id: {
+          type: Number,
+          required: true,
+        },
         title: {
           type: String,
-          default : '',
+          required: true,
         },
         price: {
           type: Number,
-          default : 0,
+          required: true,
+
         },
         urlImage: {
           type: String,
-          default : '',
-        },
-        toolTip: {
-          type: String,
-          default: 'Adicionar ao carrinho'
+          required: true,
+
         },
         isNewCard: {
           type: Boolean,
-          default: false
+          default: false,
         }
     },
 
     methods: {
+      AddAmount() {
+        this.amount += 1;
+      },
+      RemoveAmount() {
+        if(this.amount > 0)
+        {
+          this.amount -= 1;
+        }
+      },
     },
     components: {
       ModalForm
