@@ -18,11 +18,7 @@
     
         <v-text-field ></v-text-field>
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon >
-        <v-icon>mdi-cart</v-icon>
-      </v-btn>
+      <CartModal/>
 
 
     </v-app-bar>
@@ -61,6 +57,8 @@
 </template>
 
 <script>
+import CartModal from './CartModal.vue'
+
   export default {
     data: () => ({
       drawer: false,
@@ -71,6 +69,9 @@
         type: String,
         default: "Fast Snack"
       }
+    },
+    components: {
+      CartModal,
     }
   }
 </script>
