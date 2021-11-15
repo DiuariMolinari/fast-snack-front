@@ -44,7 +44,7 @@
                                                             </v-icon>
                                                         </v-btn>
                                                         <div class="remove text-h6 mb-14">
-                                                            <a  @click="removeItem(food)">Remover</a>
+                                                            <a style="color: #ff6a00 !important;" @click="removeItem(food)">Remover</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,6 +122,9 @@ export default {
             this.foodList = this.foodList.filter(f => f.id != food.id)
         },
     },
+    mounted(){
+        this.$root.$on('addToCart', (food) => this.foodList.push(food));
+    },
     components: {
     }
 }
@@ -140,6 +143,5 @@ export default {
     position: relative;
     left: -104px;
     top: 57px;
-    color: red !important;
 }
 </style>

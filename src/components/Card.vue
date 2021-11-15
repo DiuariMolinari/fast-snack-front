@@ -92,6 +92,15 @@ import FoodModalForm from './FoodModalForm.vue'
         }
       },
       addToCart() {
+        this.$root.$emit('addToCart', { 
+            id: this.id,
+            title: this.title,
+            description: this.description,
+            price: this.price,
+            urlImage: this.urlImage,
+            amount: this.amount,
+        });
+
         this.amount = 0
       }
     },
