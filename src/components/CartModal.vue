@@ -22,8 +22,7 @@
                                                     <div class="text-h5 pa-2 ms-10">
                                                         {{ food.title }}
                                                     </div>
-                                                    <v-spacer>
-                                                    </v-spacer>
+                                                    <v-spacer></v-spacer>
                                                     <div class="text-h5 me-16" >
                                                         {{ "R$ " + food.price * food.amount }}
                                                     </div>
@@ -51,11 +50,23 @@
                                             </v-card>
                                         </v-col>    
                                     </div>
-
+                                    <v-row justify="space-around">
+                                        <v-spacer></v-spacer>
+                                        <div class="text-h5">
+                                            <span>Total: R$ {{ total }}</span>
+                                        </div>
+                                        <v-spacer></v-spacer>
+                                    </v-row>
                             </v-card-text>
+
+                           
+
                             <v-card-actions class="justify-end">
                                 <v-btn text @click="dialog.value = false">
                                     Voltar
+                                </v-btn>
+                                <v-btn text @click="confirmRequest()" color="primary">
+                                    Confirmar Pedido
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
@@ -69,13 +80,20 @@ export default {
     data: () => ({
         foodList: [
             
-        ]
+        ],
     }),
-    props: {
-        isNewCard: {
-          type: Boolean,
-          default: false,
+    computed:{
+        total(){
+            var total = 0;
+            if(this.foodList.length > 0)
+            {
+                this.foodList.map(f => total += f.amount * f.price)
+            }
+            return total;
         }
+    },
+    props: {
+        
     },
     methods: {
         addAmount(food) {
@@ -90,6 +108,9 @@ export default {
         removeItem(food){
             this.foodList = this.foodList.filter(f => f.id != food.id)
         },
+        confirmRequest(){
+
+        }
     },
     mounted(){
         this.$root.$on('addToCart', (food) => {
