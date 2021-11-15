@@ -68,38 +68,7 @@
 export default {
     data: () => ({
         foodList: [
-            {
-                id: 1,
-                title: 'Salmão Refogado',
-                description: "500g de salmão refogado, acompanhado com salada.",
-                price: 25,
-                urlImage: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
-                amount: 2,
-            },
-            {
-                id: 2,
-                title: 'Salmão Refogado',
-                description: "500g de salmão refogado, acompanhado com salada.",
-                price: 25,
-                urlImage: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
-                amount: 2,
-            },
-            {
-                id: 3,
-                title: 'Salmão Refogado',
-                description: "500g de salmão refogado, acompanhado com salada.",
-                price: 25,
-                urlImage: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
-                amount: 2,
-            },
-            {
-                id: 4,
-                title: 'Salmão Refogado',
-                description: "500g de salmão refogado, acompanhado com salada.",
-                price: 25,
-                urlImage: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
-                amount: 2,
-            }
+            
         ]
     }),
     props: {
@@ -123,7 +92,15 @@ export default {
         },
     },
     mounted(){
-        this.$root.$on('addToCart', (food) => this.foodList.push(food));
+        this.$root.$on('addToCart', (food) => {
+
+            var foodAlreadyAdd = this.foodList.filter(f => f.id == food.id)[0];
+            if(foodAlreadyAdd != null) {
+                foodAlreadyAdd.amount += food.amount
+            }
+            else
+                this.foodList.push(food);
+        });
     },
     components: {
     }

@@ -55,25 +55,23 @@ import FoodModalForm from './FoodModalForm.vue'
     props: {
         id: {
           type: Number,
-          required: true,
+          default: -1
         },
         title: {
           type: String,
-          required: true,
+          default: "Sem título"
         },
         description: {
           type: String,
-          default: "",
+          default: "Sem descrição",
         },
         price: {
           type: Number,
-          required: true,
-
+          default: 0,
         },
         urlImage: {
           type: String,
-          required: true,
-
+          default: ""
         },
         isNewCard: {
           type: Boolean,

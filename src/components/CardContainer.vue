@@ -10,7 +10,7 @@
           :key="card.id"
           :cols="columns"
         >
-          <Card :title="card.title" :price="card.price" :urlImage="card.src" :isNewCard="card.isNewCard" :description="card.description" />
+          <Card :id="card.id" :title="card.title" :price="card.price" :urlImage="card.urlImage" :isNewCard="card.isNewCard" :description="card.description" />
         </v-col>
       </v-row>
     </v-container>
@@ -22,16 +22,23 @@ import Card from './Card.vue'
 
   export default {
     data: () => ({
+      idAdminLogin: true,
       cards: [
-        { id: 1, isNewCard: true,  title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 2, isNewCard: false, title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 3, isNewCard: false, title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 4, isNewCard: false, title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 5, isNewCard: false, title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 6, isNewCard: false, title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
-        { id: 7, isNewCard: false, title: 'Salmão Refogado', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, src: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
+        { id: 1, isNewCard: false, title: 'Salmão Refogado 1', description: "500g de salmão refogado, acompanhado com salada.",  price: 25, urlImage: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg'},
       ],
     }),
+    mounted() {
+       this.$root.$on('addNewFood', (food) => {
+          food.price.replace(".",",")
+          this.cards.push(food);
+        });
+
+        if(this.idAdminLogin) {
+          this.cards.push({
+            isNewCard: true
+          })
+        }
+    },
     components: {
       Card,
     },
