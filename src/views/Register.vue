@@ -30,14 +30,27 @@
     <v-select
       v-model="user.profile"
       prepend-icon="mdi-account-details"
-      :items="perfis"
+      :items="profiles"
       :rules="[v => !!v || 'Perfil é obrigatório']"
       label="Perfil"
       required
     ></v-select>
 
-   <v-text-field  label="Senha" v-model="user.password" required :type="showPassword ? 'text' : 'password'"  prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"  @click:append="showPassword = !showPassword"/>
-   <v-text-field  label="Confirmar Senha" v-model="user.validatePassword" required :type="showPassword ? 'text' : 'password'"  prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"  @click:append="showPassword = !showPassword"/> 
+   <v-text-field  label="Senha"
+    v-model="user.password" 
+    required :type="showPassword ? 'text' : 'password'"  
+    prepend-icon="mdi-lock" 
+    :rules="passwordRules"
+    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"  
+    @click:append="showPassword = !showPassword"/>
+
+   <v-text-field  label="Confirmar Senha"
+    v-model="user.validatePassword"
+    :rules="[(user.password === user.validatePassword) || 'A senha deve coincidir']"
+    required :type="showConfirmPassword ? 'text' : 'password'"
+    prepend-icon="mdi-lock" 
+    :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+    @click:append="showConfirmPassword = !showConfirmPassword"/> 
  
     <v-btn
       :disabled="!valid"
@@ -69,6 +82,7 @@
   export default {
     data: () => ({
       showPassword:false,
+      showConfirmPassword: false,
       valid: true,
       user:{
           name:"",
@@ -81,11 +95,14 @@
         v => !!v || 'Nome é obrigatório',
         v => (v && v.length >= 10) || 'O nome deve ter mais de 10 caracteres',
       ],
+      passwordRules : [
+        v => (v && v.length >= 10) || 'Senha deve conter mais de 10 caracteres'
+      ],
       emailRules: [
-        v => !!v || 'E-mail is required',
+        v => !!v || 'E-mail é obrigatório',
         v => /.+@.+\..+/.test(v) || 'E-mail deve ser válido',
       ],
-      perfis: [
+      profiles: [
         'Administrador',
         'Cliente',
       ],
