@@ -30,7 +30,7 @@
                 <v-autocomplete label="Categoria" v-model="food.category" :items="['Bebida', 'Brasileira', 'Doce', 'Japonesa', 'Lanche', 'Pizza', 'Salgado', 'Vegetariana']"></v-autocomplete>
               </v-col>
               <v-col cols="12" sm="6" md="4" >
-                <v-text-field label="Preço" v-model="food.price" type="number" prefix="R$" min="0.1" required></v-text-field>
+                <v-text-field label="Preço" v-model.number="food.price" type="number" prefix="R$" min="0.1" required></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field label="Descrição" v-model="food.description" required></v-text-field>
@@ -81,18 +81,17 @@ export default {
         this.dialog = false
       },
       save(){
-        if(this.isValidFields())
-        {
-          this.$root.$emit('addNewFood', { 
-            id: this.food.id,
-            title: this.food.name,
-            description: this.food.description,
-            price: this.food.price,
-            urlImage: this.food.urlImage,
+        if(this.isValidFields()) {
+          const config = {
+            headers: {
+              Authorization: 'Bearer ' + this.$store.getters.getAcessToken
+            }
+          }
+          const newFood = { ...this.food } 
+          this.$http.post('foods', newFood, config).then(() => {
+            this.clearFood();
+            this.dialog = false;
           });
-          
-          this.clearFood()
-          this.dialog = false;
         }
       },
       isValidFields(){

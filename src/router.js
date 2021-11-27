@@ -1,8 +1,8 @@
 import Vue  from 'vue'
 import Router from 'vue-router'
-import Register from '@/views/Register'
+import Register from '@/views/users/Register'
 import Login from '@/views/Login'
-import CardContainer from '@/views/CardContainer'
+import CardContainer from '@/views/catalog/CardContainer'
 
 Vue.use(Router)
 
@@ -31,8 +31,10 @@ const router = new Router({
     ]
 })
 
-// router.beforeEach((to, from, next) => {
-//     //aqui valido o usuario esta logado antes de ir para o catalogo
-// })
+router.beforeEach((to, from, next) => {
+    if(localStorage.getItem('user_logged') || (to.path == '/login' || '/catalog')) {
+        next();
+    }
+});
 
 export default router;

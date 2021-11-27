@@ -1,19 +1,12 @@
 <template>
-
-    <v-card  v-if="isNewCard" height="280px">
-      <v-card-actions class="justify-center center" >
-          <FoodModalForm />
-      </v-card-actions>
-    </v-card>
-
-    <v-card v-else>
-        <v-img :src="urlImage" class="white--text align-end image" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px">
-        <v-card-title v-text="title"></v-card-title>
-        <v-card-subtitle v-text="description"></v-card-subtitle>
+    <v-card>
+        <v-img :src="food.urlImage" class="white--text align-end image" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px">
+        <v-card-title v-text="food.title"></v-card-title>
+        <v-card-subtitle v-text="food.description"></v-card-subtitle>
       </v-img>
 
       <v-card-actions>
-        <v-card-title v-text="`R$ ${price}`"></v-card-title>
+        <v-card-title v-text="`R$ ${food.price.toFixed(2)}`"></v-card-title>
         <v-spacer></v-spacer>
         <v-btn class="mx-2" fab dark small color="red" @click="removeAmount">
           <v-icon  color="white" dark>
@@ -46,36 +39,13 @@
 </template>
 
 <script>
-import FoodModalForm from './FoodModalForm.vue'
-
   export default {
     data: () => ({
         amount: 0,
     }),
     props: {
-        id: {
-          type: Number,
-          default: -1
-        },
-        title: {
-          type: String,
-          default: "Sem título"
-        },
-        description: {
-          type: String,
-          default: "Sem descrição",
-        },
-        price: {
-          type: Number,
-          default: 0,
-        },
-        urlImage: {
-          type: String,
-          default: ""
-        },
-        isNewCard: {
-          type: Boolean,
-          default: false,
+        food: {
+          type: Object
         }
     },
 
@@ -101,9 +71,6 @@ import FoodModalForm from './FoodModalForm.vue'
 
         this.amount = 0
       }
-    },
-    components: {
-      FoodModalForm
     }
   }
 </script>

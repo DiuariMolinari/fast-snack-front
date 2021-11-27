@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <MainMenu/>
+    <MainMenu />
     <v-main>
       <router-view/>
     </v-main>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import MainMenu from './components/MainMenu.vue'
+import MainMenu from './common/components/MainMenu.vue'
 
 export default {
   name: 'App',

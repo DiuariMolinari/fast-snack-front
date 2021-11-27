@@ -40,14 +40,21 @@
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>Página Inicial</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
+            <v-list-item-title>Usuário</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="logoutUser">
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-item-list-title>Logout</v-item-list-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -72,6 +79,13 @@ import CartModal from './CartModal.vue'
     },
     components: {
       CartModal,
+    },
+    methods: {
+      logoutUser() {
+        localStorage.removeItem('user_logged');
+        this.$store.dispatch('setToken', '');
+        this.$router.push({ path: '/login' });
+      }
     }
   }
 </script>
