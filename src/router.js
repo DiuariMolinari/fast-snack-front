@@ -1,6 +1,6 @@
 import Vue  from 'vue'
 import Router from 'vue-router'
-import Register from '@/views/users/Register'
+import RegisterUser from '@/views/users/RegisterUser'
 import Login from '@/views/Login'
 import CardContainer from '@/views/catalog/CardContainer'
 
@@ -11,7 +11,7 @@ const router = new Router({
     routes: [
         {
             path: '/register',
-            component: Register
+            component: RegisterUser
         },
         {
             path: '/login',

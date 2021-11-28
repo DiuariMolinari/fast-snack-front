@@ -1,6 +1,16 @@
 <template>
     <v-container fluid>
-      <v-row dense>
+      <v-row>
+        <v-col :cols="columns" v-if="idAdminLogin">
+          <v-card height="280px">
+            <v-card-actions class="justify-center center" >
+              <FoodModalForm 
+                @foodCreated="updateCardList"
+              />
+            </v-card-actions>
+          </v-card>
+        </v-col>
+
         <v-col
           v-for="card in cards"
           :key="card.id"
@@ -14,6 +24,7 @@
 
 <script>
 import Card from './components/Card.vue'
+import FoodModalForm from './components/FoodModalForm.vue'
 
   export default {
     data: () => ({
@@ -25,6 +36,7 @@ import Card from './components/Card.vue'
     },
     components: {
       Card,
+      FoodModalForm
     },
     computed: {
       columns: function() {
@@ -43,16 +55,7 @@ import Card from './components/Card.vue'
     methods: {
       updateCardList() {
         this.$http.get('foods').then(data => {
-          data.forEach(food => {
-            const cardData = {
-              id: food._id,
-              title: food.name,
-              description: food.description,
-              price: food.price,
-              urlImage: food.urlImage
-            }
-            this.cards.push(cardData);
-          });
+          this.cards = data;
         });
       }
     }

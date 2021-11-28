@@ -61,7 +61,7 @@
       },
       addToCart() {
         this.$root.$emit('addToCart', { 
-            id: this.id,
+            id: this._id,
             title: this.title,
             description: this.description,
             price: this.price,

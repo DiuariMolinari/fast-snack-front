@@ -14,7 +14,8 @@
 
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="info" @click="login">Entrar</v-btn>
+          <v-btn color="success" @click="login">Entrar</v-btn>
+          <v-btn color="info" @click="enterAsVisitor">Entrar como visitante</v-btn>
         </v-card-actions>
       </v-card>
     </v-content>
@@ -41,6 +42,10 @@ export default {
         localStorage.setItem('user_logged', this.user);
         this.$router.push({ path: '/catalog' });
       });
+    },
+    enterAsVisitor() {
+      localStorage.removeItem('user_logged');
+      this.$router.push({ path: '/catalog' })
     }
   }
 }

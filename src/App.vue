@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <MainMenu />
+    <MainMenu :userLogged="userLogged"/>
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -18,7 +18,10 @@ export default {
   },
   
   data: () => ({
-      
-    }),
+    userLogged: ''
+  }),
+  updated() {
+    this.userLogged = localStorage.getItem('user_logged');
+  }
 };
 </script>
