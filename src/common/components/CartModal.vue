@@ -1,7 +1,7 @@
 <template>
         <v-row justify="space-around">
                 <v-dialog transition="dialog-top-transition" max-width="90%" >
-                    <template v-slot:activator="{ on, attrs }">
+                    <template v-slot:activator="{ on, attrs }" >
                         <v-btn color="white" v-bind="attrs" v-on="on" icon>
                             <v-icon>mdi-cart</v-icon>
                         </v-btn>

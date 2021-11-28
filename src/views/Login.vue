@@ -8,8 +8,8 @@
       <v-card width="500" class="mx-auto mt-9">
         <v-card-title>Login</v-card-title>
         <v-card-text>
-          <v-text-field label="Usuário" v-model="user.username" required prepend-icon="mdi-account-circle"/>
-           <v-text-field  label="Senha" v-model="user.password" required :type="showPassword ? 'text' : 'password'"  prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"  @click:append="showPassword = !showPassword"/>
+          <v-text-field label="Usuário" v-model="user.username" prepend-icon="mdi-account-circle"/>
+           <v-text-field  label="Senha" v-model="user.password" :type="showPassword ? 'text' : 'password'"  prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"  @click:append="showPassword = !showPassword"/>
         </v-card-text>
 
         <v-divider></v-divider>
