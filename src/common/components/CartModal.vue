@@ -59,8 +59,6 @@
                                     </v-row>
                             </v-card-text>
 
-                           
-
                             <v-card-actions class="justify-end">
                                 <v-btn text @click="dialog.value = false">
                                     Voltar
@@ -78,9 +76,7 @@
 <script>
 export default {
     data: () => ({
-        foodList: [
-            
-        ],
+        foodList: [],
     }),
     computed:{
         total(){

@@ -1,21 +1,9 @@
 <template>
     <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
+      max-width="1000px"
+      persistent 
+      :value="true"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-            <v-icon color="white" dark>
-                mdi-plus
-            </v-icon>
-        </v-btn>
-      </template>
       <v-card>
         <v-card-title class="justify-center">
           <span class="text-h5">Novo Alimento</span>
@@ -43,7 +31,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="reset">
+          <v-btn color="blue darken-1" text @click="$emit('cancel')">
             Cancelar
           </v-btn>
           <v-btn color="blue darken-1" text @click="save">
@@ -56,31 +44,42 @@
 
 <script>
 export default {
-    data: () => ({
-      dialog: false,
-      food: {}
-    }),
-    methods:{
-      reset(){
-        this.food = {}
-        this.dialog = false
-      },
-      save(){
-        if(this.$refs.form.validate()) {
-          const config = {
-            headers: {
-              Authorization: 'Bearer ' + this.$store.getters.getAcessToken
-            }
+  props: {
+    food: {
+      type: Object
+    }
+  },
+  data: () => ({
+    dialog: false
+  }),
+  methods:{
+    reset(){
+      this.food = {}
+      this.dialog = false
+    },
+    save(){
+      if(this.$refs.form.validate()) {
+        const config = {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.getters.getAcessToken
           }
-          const newFood = { ...this.food } 
+        }
+        const newFood = { ...this.food } 
+        if(newFood._id) {
+          this.$http.put(`foods/${newFood._id}`, newFood, config).then(() => {
+            this.$emit('foodSaved')
+            this.reset()
+          })
+        }else {
           this.$http.post('foods', newFood, config).then(() => {
-            this.$emit('foodCreated')
+            this.$emit('foodSaved')
             this.reset()
           })
         }
       }
-    },
-  }
+    }
+  },
+}
 </script>
     
 <style>

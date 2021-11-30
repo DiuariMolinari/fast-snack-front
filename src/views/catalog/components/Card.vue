@@ -5,11 +5,13 @@
         <div class="d-flex justify-space-between">
           <v-card-subtitle v-text="food.description"></v-card-subtitle>
           <div class="ma-2" v-if="userLogged">   
-            <v-icon  color="red" dark >
-              mdi-delete-outline
+            <v-icon  color="red" dark 
+              @click="deleteFood" >
+                mdi-delete-outline
             </v-icon>
-            <v-icon  color="blue" dark >
-              mdi-pencil-outline
+            <v-icon  color="blue" dark 
+              @click="$emit('selectCard', food)" >
+                mdi-pencil-outline
             </v-icon>
           </div>
         </div>
@@ -72,15 +74,25 @@
       },
       addToCart() {
         this.$root.$emit('addToCart', { 
-            id: this._id,
-            title: this.title,
-            description: this.description,
-            price: this.price,
-            urlImage: this.urlImage,
-            amount: this.amount,
+            id: this.food._id,
+            title: this.food.title,
+            description: this.food.description,
+            price: this.food.price,
+            urlImage: this.food.urlImage,
+            amount: this.food.amount,
         });
 
         this.amount = 0
+      },
+      deleteFood() {
+        const config = {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.getters.getAcessToken
+          }
+        }
+        this.$http.delete(`foods/${this.food._id}`, config).then(() => {
+          this.$emit('foodDeleted');
+        });
       }
     }
   }
