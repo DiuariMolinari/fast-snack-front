@@ -74,12 +74,13 @@
       },
       addToCart() {
         this.$root.$emit('addToCart', { 
-            id: this.food._id,
-            title: this.food.title,
+            _id: this.food._id,
+            title: this.food.name,
             description: this.food.description,
+            category: this.food.category,
             price: this.food.price,
             urlImage: this.food.urlImage,
-            amount: this.food.amount,
+            amount: this.amount,
         });
 
         this.amount = 0

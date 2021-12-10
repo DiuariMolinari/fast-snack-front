@@ -12,15 +12,15 @@
                             </v-toolbar>
                             <v-card-text>
                                 
-                                    <div class="text-h3 pa-8">
+                                    <div class="text-h5 pa-8">
                                         Itens
                                         <v-col >
                                             <v-card  class="d-flex pa-3 ma-2" outlined tile v-for="food in foodList" :key="food.id">
                                                 <div class="item">
                                                     <v-img max-height="10%" max-width="10%" :src="food.urlImage" />
                                                     
-                                                    <div class="text-h5 pa-2 ms-10">
-                                                        {{ food.title }}
+                                                    <div class="pa-2 ms-10">
+                                                        {{ food.name }}
                                                     </div>
                                                     <v-spacer></v-spacer>
                                                     <div class="text-h5 me-16" >
@@ -56,14 +56,17 @@
                                             <span>Total: R$ {{ total }}</span>
                                         </div>
                                         <v-spacer></v-spacer>
+                                        <div>
+                                            <v-text-field v-model="table" label="Mesa do pedido"></v-text-field>
+                                        </div>
                                     </v-row>
                             </v-card-text>
 
                             <v-card-actions class="justify-end">
-                                <v-btn text @click="dialog.value = false">
+                                <v-btn text id="btn-voltar" @click="dialog.value = false">
                                     Voltar
                                 </v-btn>
-                                <v-btn text @click="confirmRequest()" color="primary">
+                                <v-btn text @click="confirmRequest" color="primary">
                                     Confirmar Pedido
                                 </v-btn>
                             </v-card-actions>
@@ -77,6 +80,7 @@
 export default {
     data: () => ({
         foodList: [],
+        table: 0,
     }),
     computed:{
         total(){
@@ -87,9 +91,6 @@ export default {
             }
             return total;
         }
-    },
-    props: {
-        
     },
     methods: {
         addAmount(food) {
@@ -102,16 +103,39 @@ export default {
             }
         },
         removeItem(food){
-            this.foodList = this.foodList.filter(f => f.id != food.id)
+            this.foodList = this.foodList.filter(f => f._id != food._id)
         },
         confirmRequest(){
-
+            if(this.foodList.length && this.table != 0) {
+                const newDemand = { foods: [] }
+                newDemand.table = this.table;
+                this.foodList.forEach(food => {
+                    for(let i = 0; i < food.amount; i++) {
+                        const foodToAdd = { ...food }
+                        newDemand.foods.push(foodToAdd);
+                    }
+                })
+                const config = {
+                    headers: {
+                        Authorization: 'Bearer ' + this.$store.getters.getAcessToken
+                    }
+                }
+                this.$http.post('demands', newDemand, config).then(data => {
+                    this.$router.push(`/demand/${data._id}`)
+                    this.resetAll()
+                    document.getElementById('btn-voltar').click()
+                });
+            }
+        },
+        resetAll() {
+            this.foodList = [],
+            this.table = 0
         }
     },
     mounted(){
         this.$root.$on('addToCart', (food) => {
 
-            var foodAlreadyAdd = this.foodList.filter(f => f.id == food.id)[0];
+            var foodAlreadyAdd = this.foodList.filter(f => f._id == food._id)[0];
             if(foodAlreadyAdd != null) {
                 foodAlreadyAdd.amount += food.amount
             }

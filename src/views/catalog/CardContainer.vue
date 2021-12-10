@@ -7,6 +7,7 @@
               <v-btn
                 elevation="2"
                 large
+                color="secondary"
               ><v-icon>mdi-plus</v-icon></v-btn>
               <v-card-title> Adicionar um novo alimento </v-card-title>
             </v-card-actions>

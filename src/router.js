@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import RegisterUser from '@/views/users/RegisterUser'
 import Login from '@/views/Login'
 import CardContainer from '@/views/catalog/CardContainer'
+import DemandStatus from '@/views/demands/DemandStatus'
 
 Vue.use(Router)
 
@@ -21,9 +22,11 @@ const router = new Router({
             path: '/catalog',
             component: CardContainer
         },
-
-
-
+        {
+            path: '/demand/:demandId',
+            component: DemandStatus,
+            props: true
+        },
         {
             path: '*',
             redirect: "/login"

@@ -66,9 +66,7 @@ import CartModal from './CartModal.vue'
         type: String,
         default: "Fast Snack"
       },
-      userLogged: {
-        type: Object
-      }
+      userLogged: {}
     },
     components: {
       CartModal,
