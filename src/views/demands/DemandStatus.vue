@@ -85,7 +85,7 @@ export default {
                     color: 'orange'
                 }, 
                 {
-                    name: 'Concluido',
+                    name: 'Concluído',
                     color: 'green'
                 }
             ]

@@ -115,12 +115,8 @@ export default {
                         newDemand.foods.push(foodToAdd);
                     }
                 })
-                const config = {
-                    headers: {
-                        Authorization: 'Bearer ' + this.$store.getters.getAcessToken
-                    }
-                }
-                this.$http.post('demands', newDemand, config).then(data => {
+                
+                this.$http.post('demands', newDemand).then(data => {
                     this.$router.push(`/demand/${data._id}`)
                     this.resetAll()
                     document.getElementById('btn-voltar').click()

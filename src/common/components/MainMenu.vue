@@ -20,13 +20,21 @@
     >
       <v-list-item-group>
         <v-list>
-          <v-list-item>
+          <v-list-item @click="home">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
 
             <v-list-item-title>Home</v-list-item-title> 
-        </v-list-item>
+          </v-list-item>
+
+          <v-list-item @click="demandControl">
+            <v-list-item-icon>
+              <v-icon>mdi-newspaper</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-title>Pedidos</v-list-item-title> 
+          </v-list-item>
 
           <v-list-group
             :value="true"
@@ -76,6 +84,12 @@ import CartModal from './CartModal.vue'
         localStorage.removeItem('user_logged');
         this.$store.dispatch('setToken', null);
         this.$router.push({ path: '/login' });
+      },
+      demandControl() {
+        this.$router.push({ path: '/demands' })
+      },
+      home() {
+        this.$router.push({ path: '/catalog' })
       }
     }
   }

@@ -4,6 +4,7 @@ import RegisterUser from '@/views/users/RegisterUser'
 import Login from '@/views/Login'
 import CardContainer from '@/views/catalog/CardContainer'
 import DemandStatus from '@/views/demands/DemandStatus'
+import DemandsControl from '@/views/demands/DemandsControl'
 
 Vue.use(Router)
 
@@ -26,6 +27,10 @@ const router = new Router({
             path: '/demand/:demandId',
             component: DemandStatus,
             props: true
+        },
+        {
+            path: '/demands',
+            component: DemandsControl
         },
         {
             path: '*',
