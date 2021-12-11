@@ -10,7 +10,7 @@ Vue.use({
         Vue.prototype.$http.interceptors.response.use(res => res.data, 
             error => {
                 if(error.response.status == 401) {
-                   global.location.href = `${window.location.origin}/login`;
+                   global.location.href = `${global.location.origin}/login`;
                 }
             });
     }
