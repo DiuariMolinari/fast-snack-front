@@ -1,6 +1,6 @@
 import Vue  from 'vue'
 import Router from 'vue-router'
-import RegisterUser from '@/views/users/RegisterUser'
+import UsersControl from '@/views/users/UsersControl'
 import Login from '@/views/Login'
 import CardContainer from '@/views/catalog/CardContainer'
 import DemandStatus from '@/views/demands/DemandStatus'
@@ -11,10 +11,6 @@ Vue.use(Router)
 const router = new Router({
     mode: 'history',
     routes: [
-        {
-            path: '/register',
-            component: RegisterUser
-        },
         {
             path: '/login',
             component: Login
@@ -31,6 +27,10 @@ const router = new Router({
         {
             path: '/demands',
             component: DemandsControl
+        },
+        {
+            path: '/users',
+            component: UsersControl
         },
         {
             path: '*',

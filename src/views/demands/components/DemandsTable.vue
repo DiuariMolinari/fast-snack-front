@@ -6,7 +6,7 @@
             :headers="headers"
             :items="demands"
             :search="search">
-                <template slot:item._id="{ item }">
+                <template v-slot:item._id="{ item }">
                     <v-icon 
                         small
                         class="mr-2"
@@ -15,7 +15,7 @@
                     </v-icon>
                     <span> {{ item._id }} </span>
                 </template>
-                <template slot:item.actions="{ item }">
+                <template v-slot:item.actions="{ item }">
                     <v-icon 
                         class="mr-2"
                         :color="defineColorStatus(item.status)" 

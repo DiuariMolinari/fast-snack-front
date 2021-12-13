@@ -36,24 +36,13 @@
             <v-list-item-title>Pedidos</v-list-item-title> 
           </v-list-item>
 
-          <v-list-group
-            :value="true"
-            prepend-icon="mdi-account-circle"
-          >
-            <template v-slot:activator>
-              <v-list-item-title>Usuarios</v-list-item-title>
-            </template>
+          <v-list-item @click="usersControl">
+            <v-list-item-icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-list-item-icon>
 
-            <v-list-item class="ml-8">
-              <v-list-item-icon>
-                <v-icon>mdi-account-plus</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>Cadastrar Usuario</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-          </v-list-group>
+            <v-list-item-title>Usuarios</v-list-item-title> 
+          </v-list-item>
         </v-list>
     </v-list-item-group>
     </v-navigation-drawer>
@@ -87,6 +76,9 @@ import CartModal from './CartModal.vue'
       },
       demandControl() {
         this.$router.push({ path: '/demands' })
+      },
+      usersControl() {
+        this.$router.push({ path: '/users' })
       },
       home() {
         this.$router.push({ path: '/catalog' })
