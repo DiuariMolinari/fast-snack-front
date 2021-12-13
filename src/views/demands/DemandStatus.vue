@@ -23,6 +23,24 @@
                         </div>
                     </v-timeline-item>
                 </v-timeline>
+
+                <div class="ma-6">
+                    <div class="item" 
+                        v-for="food in demand.foods" 
+                        :key="food.title"
+                    >
+                        <v-img max-height="10%" max-width="10%" :src="food.urlImage" />
+                                                        
+                        <div class="pa-2 ms-10">
+                            {{ food.title }}
+                        </div>
+                        <v-spacer></v-spacer>
+                        <div class="text-h5 me-16" >
+                            {{ "R$ " + food.price }}
+                        </div>
+                    </div>
+                </div>
+                
             </v-card-text>
             <v-card-actions>
                 <div class="ma-4">
@@ -54,7 +72,7 @@ export default {
     },
     data() {
         return {
-            demand: {}   
+            demand: { foods: []}   
         }
     },
     methods: {
